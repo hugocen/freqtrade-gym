@@ -20,7 +20,7 @@ from freqtrade.exchange import timeframe_to_minutes, timeframe_to_seconds
 from freqtrade.persistence import Trade
 from freqtrade.strategy.interface import IStrategy, SellCheckTuple, SellType
 
-from .env_render import TradingRender
+
 
 logger = logging.getLogger(__name__)
 
