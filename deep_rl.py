@@ -17,7 +17,7 @@ if __name__ == "__main__":
     config['timerange'] = '20180101-20200401'
     config['simulate_length'] = 60*24*30
 
-    env = SubprocVecEnv([lambda: TradingEnv(config)]*12)
+    env = TradingEnv(config)
     policy_kwargs = dict(layers=[512, 512, 512, 512, 512, 512])
     model = ACER(
         MlpPolicy, env,
