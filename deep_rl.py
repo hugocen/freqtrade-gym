@@ -3,7 +3,7 @@ from freqtrade.configuration import Configuration
 
 config = Configuration.from_files(['config_rl.json'])
 config["ticker_interval"] = "5m"
-config["strategy"] = "IndicatorforRLFull"
+config["strategy"] = "IndicatorforRL"
 
 data_location = Path(config['user_data_dir'], 'data', 'binance')
 
