@@ -33,8 +33,9 @@ class TradingEnv(gym.Env):
         super(TradingEnv, self).__init__()
 
         self.config = config
-        self.strategy = StrategyResolver.load_strategy(config)
-        self.fee = config['fee']
+        self.config['strategy'] = self.config['gym_parameters']['indicator_strategy']
+        self.strategy = StrategyResolver.load_strategy(self.config)
+        self.fee = self.config['gym_parameters']['fee']
         self.timeframe = str(config.get('ticker_interval'))
         self.timeframe_min = timeframe_to_minutes(self.timeframe)
         self.required_startup = self.strategy.startup_candle_count
@@ -79,13 +80,13 @@ class TradingEnv(gym.Env):
         self.not_complete_trade_decay = 0.5
         self.game_loss = -0.5
         self.game_win = 1.0
-        self.simulate_length = self.config['simulate_length']
+        self.simulate_length = self.config['gym_parameters']['simulate_length']
            
         # Actions 
         self.action_space = spaces.Discrete(3)
 
         self.observation_space = spaces.Box(
-            low=np.full(55, -np.inf), high=np.full(55, np.inf), dtype=np.float)
+            low=np.full(24, -np.inf), high=np.full(24, np.inf), dtype=np.float)
 
     def _next_observation(self):    
         row = self.ticker[self.index]
@@ -95,11 +96,11 @@ class TradingEnv(gym.Env):
             trad_status = self.trade.calc_profit_ratio(rate=row.open)
 
         obs = np.array([
-            row.open,
-            row.high,
-            row.low,
-            row.close,
-            row.volume,
+            # row.open,
+            # row.high,
+            # row.low,
+            # row.close,
+            # row.volume,
             row.adx,
             row.plus_dm,
             row.plus_di,
@@ -109,8 +110,8 @@ class TradingEnv(gym.Env):
             row.aroondown,
             row.aroonosc,
             row.ao,
-            row.kc_percent,
-            row.kc_width,
+            # row.kc_percent,
+            # row.kc_width,
             row.uo,
             row.cci,
             row.rsi,
@@ -126,30 +127,30 @@ class TradingEnv(gym.Env):
             row.macdhist,
             row.mfi,
             row.roc,
-            row.bb_percent,
-            row.bb_width,
-            row.wbb_percent,
-            row.wbb_width,
-            row.htsine,
-            row.htleadsine,
-            row.CDLHAMMER,
-            row.CDLINVERTEDHAMMER,
-            row.CDLDRAGONFLYDOJI,
-            row.CDLPIERCING,
-            row.CDLMORNINGSTAR,
-            row.CDL3WHITESOLDIERS,
-            row.CDLHANGINGMAN,
-            row.CDLSHOOTINGSTAR,
-            row.CDLGRAVESTONEDOJI,
-            row.CDLDARKCLOUDCOVER,
-            row.CDLEVENINGDOJISTAR,
-            row.CDLEVENINGSTAR,
-            row.CDL3LINESTRIKE,
-            row.CDLSPINNINGTOP,
-            row.CDLENGULFING,
-            row.CDLHARAMI,
-            row.CDL3OUTSIDE,
-            row.CDL3INSIDE,
+            # row.bb_percent,
+            # row.bb_width,
+            # row.wbb_percent,
+            # row.wbb_width,
+            # row.htsine,
+            # row.htleadsine,
+            # row.CDLHAMMER,
+            # row.CDLINVERTEDHAMMER,
+            # row.CDLDRAGONFLYDOJI,
+            # row.CDLPIERCING,
+            # row.CDLMORNINGSTAR,
+            # row.CDL3WHITESOLDIERS,
+            # row.CDLHANGINGMAN,
+            # row.CDLSHOOTINGSTAR,
+            # row.CDLGRAVESTONEDOJI,
+            # row.CDLDARKCLOUDCOVER,
+            # row.CDLEVENINGDOJISTAR,
+            # row.CDLEVENINGSTAR,
+            # row.CDL3LINESTRIKE,
+            # row.CDLSPINNINGTOP,
+            # row.CDLENGULFING,
+            # row.CDLHARAMI,
+            # row.CDL3OUTSIDE,
+            # row.CDL3INSIDE,
         ], dtype=np.float)
 
         self.status = copy.deepcopy(row)
@@ -243,8 +244,7 @@ class TradingEnv(gym.Env):
         print(f'Reward: {self._reward}')
     
     def load_bt_data(self):
-        timerange = TimeRange.parse_timerange(None if self.config.get(
-            'timerange') is None else str(self.config.get('timerange')))
+        timerange = TimeRange.parse_timerange(self.config['gym_parameters']['timerange'])
 
         data = history.load_data(
             datadir=self.config['datadir'],

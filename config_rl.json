@@ -1,10 +1,16 @@
 {
+    "gym_parameters": {
+        "indicator_strategy": "IndicatorforRL",
+        "fee": 0.0015,
+        "timerange": "20201120-20201130",
+        "simulate_length": 200
+    },
     "max_open_trades": 3,
     "stake_currency": "USDT",
     "stake_amount": 50,
     "tradable_balance_ratio": 0.99,
     "fiat_display_currency": "TWD",
-    "ticker_interval": "5m",
+    "ticker_interval": "15m",
     "dry_run": true,
     "dry_run_wallet": 400,
     "unfilledtimeout": {

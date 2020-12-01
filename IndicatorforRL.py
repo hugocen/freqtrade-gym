@@ -225,57 +225,57 @@ class IndicatorforRL(IStrategy):
         # TEMA - Triple Exponential Moving Average
         # dataframe['tema'] = ta.TEMA(dataframe, timeperiod=9)
 
-        # Cycle Indicator
-        # ------------------------------------
-        # Hilbert Transform Indicator - SineWave
-        hilbert = ta.HT_SINE(dataframe)
-        dataframe['htsine'] = hilbert['sine']
-        dataframe['htleadsine'] = hilbert['leadsine']
+        # # Cycle Indicator
+        # # ------------------------------------
+        # # Hilbert Transform Indicator - SineWave
+        # hilbert = ta.HT_SINE(dataframe)
+        # dataframe['htsine'] = hilbert['sine']
+        # dataframe['htleadsine'] = hilbert['leadsine']
 
-        # Pattern Recognition - Bullish candlestick patterns
-        # ------------------------------------
-        # Hammer: values [0, 100]
-        dataframe['CDLHAMMER'] = ta.CDLHAMMER(dataframe)
-        # Inverted Hammer: values [0, 100]
-        dataframe['CDLINVERTEDHAMMER'] = ta.CDLINVERTEDHAMMER(dataframe)
-        # Dragonfly Doji: values [0, 100]
-        dataframe['CDLDRAGONFLYDOJI'] = ta.CDLDRAGONFLYDOJI(dataframe)
-        # Piercing Line: values [0, 100]
-        dataframe['CDLPIERCING'] = ta.CDLPIERCING(dataframe) # values [0, 100]
-        # Morningstar: values [0, 100]
-        dataframe['CDLMORNINGSTAR'] = ta.CDLMORNINGSTAR(dataframe) # values [0, 100]
-        # Three White Soldiers: values [0, 100]
-        dataframe['CDL3WHITESOLDIERS'] = ta.CDL3WHITESOLDIERS(dataframe) # values [0, 100]
+        # # Pattern Recognition - Bullish candlestick patterns
+        # # ------------------------------------
+        # # Hammer: values [0, 100]
+        # dataframe['CDLHAMMER'] = ta.CDLHAMMER(dataframe)
+        # # Inverted Hammer: values [0, 100]
+        # dataframe['CDLINVERTEDHAMMER'] = ta.CDLINVERTEDHAMMER(dataframe)
+        # # Dragonfly Doji: values [0, 100]
+        # dataframe['CDLDRAGONFLYDOJI'] = ta.CDLDRAGONFLYDOJI(dataframe)
+        # # Piercing Line: values [0, 100]
+        # dataframe['CDLPIERCING'] = ta.CDLPIERCING(dataframe) # values [0, 100]
+        # # Morningstar: values [0, 100]
+        # dataframe['CDLMORNINGSTAR'] = ta.CDLMORNINGSTAR(dataframe) # values [0, 100]
+        # # Three White Soldiers: values [0, 100]
+        # dataframe['CDL3WHITESOLDIERS'] = ta.CDL3WHITESOLDIERS(dataframe) # values [0, 100]
 
-        # Pattern Recognition - Bearish candlestick patterns
-        # ------------------------------------
-        # Hanging Man: values [0, 100]
-        dataframe['CDLHANGINGMAN'] = ta.CDLHANGINGMAN(dataframe)
-        # Shooting Star: values [0, 100]
-        dataframe['CDLSHOOTINGSTAR'] = ta.CDLSHOOTINGSTAR(dataframe)
-        # Gravestone Doji: values [0, 100]
-        dataframe['CDLGRAVESTONEDOJI'] = ta.CDLGRAVESTONEDOJI(dataframe)
-        # Dark Cloud Cover: values [0, 100]
-        dataframe['CDLDARKCLOUDCOVER'] = ta.CDLDARKCLOUDCOVER(dataframe)
-        # Evening Doji Star: values [0, 100]
-        dataframe['CDLEVENINGDOJISTAR'] = ta.CDLEVENINGDOJISTAR(dataframe)
-        # Evening Star: values [0, 100]
-        dataframe['CDLEVENINGSTAR'] = ta.CDLEVENINGSTAR(dataframe)
+        # # Pattern Recognition - Bearish candlestick patterns
+        # # ------------------------------------
+        # # Hanging Man: values [0, 100]
+        # dataframe['CDLHANGINGMAN'] = ta.CDLHANGINGMAN(dataframe)
+        # # Shooting Star: values [0, 100]
+        # dataframe['CDLSHOOTINGSTAR'] = ta.CDLSHOOTINGSTAR(dataframe)
+        # # Gravestone Doji: values [0, 100]
+        # dataframe['CDLGRAVESTONEDOJI'] = ta.CDLGRAVESTONEDOJI(dataframe)
+        # # Dark Cloud Cover: values [0, 100]
+        # dataframe['CDLDARKCLOUDCOVER'] = ta.CDLDARKCLOUDCOVER(dataframe)
+        # # Evening Doji Star: values [0, 100]
+        # dataframe['CDLEVENINGDOJISTAR'] = ta.CDLEVENINGDOJISTAR(dataframe)
+        # # Evening Star: values [0, 100]
+        # dataframe['CDLEVENINGSTAR'] = ta.CDLEVENINGSTAR(dataframe)
 
-        # Pattern Recognition - Bullish/Bearish candlestick patterns
-        # ------------------------------------
-        # Three Line Strike: values [0, -100, 100]
-        dataframe['CDL3LINESTRIKE'] = ta.CDL3LINESTRIKE(dataframe)
-        # Spinning Top: values [0, -100, 100]
-        dataframe['CDLSPINNINGTOP'] = ta.CDLSPINNINGTOP(dataframe) # values [0, -100, 100]
-        # Engulfing: values [0, -100, 100]
-        dataframe['CDLENGULFING'] = ta.CDLENGULFING(dataframe) # values [0, -100, 100]
-        # Harami: values [0, -100, 100]
-        dataframe['CDLHARAMI'] = ta.CDLHARAMI(dataframe) # values [0, -100, 100]
-        # Three Outside Up/Down: values [0, -100, 100]
-        dataframe['CDL3OUTSIDE'] = ta.CDL3OUTSIDE(dataframe) # values [0, -100, 100]
-        # Three Inside Up/Down: values [0, -100, 100]
-        dataframe['CDL3INSIDE'] = ta.CDL3INSIDE(dataframe) # values [0, -100, 100]
+        # # Pattern Recognition - Bullish/Bearish candlestick patterns
+        # # ------------------------------------
+        # # Three Line Strike: values [0, -100, 100]
+        # dataframe['CDL3LINESTRIKE'] = ta.CDL3LINESTRIKE(dataframe)
+        # # Spinning Top: values [0, -100, 100]
+        # dataframe['CDLSPINNINGTOP'] = ta.CDLSPINNINGTOP(dataframe) # values [0, -100, 100]
+        # # Engulfing: values [0, -100, 100]
+        # dataframe['CDLENGULFING'] = ta.CDLENGULFING(dataframe) # values [0, -100, 100]
+        # # Harami: values [0, -100, 100]
+        # dataframe['CDLHARAMI'] = ta.CDLHARAMI(dataframe) # values [0, -100, 100]
+        # # Three Outside Up/Down: values [0, -100, 100]
+        # dataframe['CDL3OUTSIDE'] = ta.CDL3OUTSIDE(dataframe) # values [0, -100, 100]
+        # # Three Inside Up/Down: values [0, -100, 100]
+        # dataframe['CDL3INSIDE'] = ta.CDL3INSIDE(dataframe) # values [0, -100, 100]
 
         # # Chart type
         # # ------------------------------------
