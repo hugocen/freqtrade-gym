@@ -1,6 +1,8 @@
 # freqtrade-gym
 
-This project is base on [freqtrade](https://github.com/freqtrade/freqtrade)
+This project is base on [freqtrade](https://github.com/freqtrade/freqtrade)  
+
+The project is in very early stage, so there are a lot of inconvenient part that you have to set up manually. I am working on the improvements.   
 
 ## Installation 
 ### 1. freqtrade
@@ -52,8 +54,27 @@ This will look like
 ![alt tensorboard](TensorBoardScreenshot.png?raw=true  "tensorboard")  
 
 
+## Example of Loading model backtesting for or trading  
+
+Move the LoadRLModel.py into user_data/strategies (you should have user_data/strategies/LoadRLModel.py)  
+
+Modified the class intial load model part to your model type and path.  
+
+Modified the populate_indicators and rl_model_redict method for your gym settings.  
+
+Run the backtesting  
+```sh  
+feqtrade backtesting -c config_rl.json -s LoadRLModel
+```  
+
+Dry-run trading (remove --dry-run for real deal!)  
+```sh  
+freqtrade trade --dry-run -c config_rl.json -s LoadRLModelgProto
+```
+
+
 ## TODO  
-- [ ] Update the strategy for loadinf the trained model for backtesting and real trading.
+- [x] Update the strategy for loadinf the trained model for backtesting and real trading.
 - [ ] The features name and total feature number(freqtradegym.py line 89) have to manually match in the indicator strategy and in freqtradegym. I would like to come up with a way to set up features in config file.  
 
 # DISCLAIMER
