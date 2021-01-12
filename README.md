@@ -77,6 +77,7 @@ freqtrade trade --dry-run -c config_rl.json -s LoadRLModelgProto
 - [x] Update the strategy for loadinf the trained model for backtesting and real trading.
 - [ ] The features name and total feature number(freqtradegym.py line 89) have to manually match in the indicator strategy and in freqtradegym. I would like to come up with a way to set up features in config file.  
 - [ ] RLlib example.
+- [ ] NEAT example.
 
 # DISCLAIMER
 This software is for educational purposes only. Do not risk money which you are afraid to lose. USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.  
