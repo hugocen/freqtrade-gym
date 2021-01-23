@@ -18,7 +18,7 @@ pip install pandas
 pip install gym
 ```
 
-## Example Usage
+## Example Usage (baseline)  
 The usage example is deep_rl.py and the config for freqtrade and freqtrade-gym is config_rl.json and use IndicatorforRL.py as feature extraction.  
 This demo is using [openai baseline library](https://github.com/hill-a/stable-baselines) to train reinforcement learning agents.  
 Baseline can install by  
@@ -53,8 +53,21 @@ tensorboard --logdir <logdir>
 This will look like  
 ![alt tensorboard](TensorBoardScreenshot.png?raw=true  "tensorboard")  
 
+## Example Usage (RLlib)  
+he usage example is rllib_example.py and the config for freqtrade and freqtrade-gym is config_rl.json and use IndicatorforRL.py as feature extraction.  
+This demo is using [RLlib](https://docs.ray.io/en/master/rllib.html) to train reinforcement learning agents.  
+Baseline can install by  
+```sh
+pip install 'ray[rllib]'
+```  
 
-## Example of Loading model backtesting for or trading  
+Run the demo to train an agent.
+```sh
+python rllib_example.py
+```  
+
+
+## Example of Loading model backtesting for or trading (baseline)  
 
 Move the LoadRLModel.py into user_data/strategies (you should have user_data/strategies/LoadRLModel.py)  
 
@@ -74,9 +87,10 @@ freqtrade trade --dry-run -c config_rl.json -s LoadRLModelgProto
 
 
 ## TODO  
-- [x] Update the strategy for loadinf the trained model for backtesting and real trading.
+- [x] Update the strategy for loadinf the trained model for backtesting and real trading. (baseline)  
 - [ ] The features name and total feature number(freqtradegym.py line 89) have to manually match in the indicator strategy and in freqtradegym. I would like to come up with a way to set up features in config file.  
-- [ ] RLlib example.
+- [x] RLlib example.
+- [ ] Update the strategy for loadinf the trained model for backtesting and real trading (RLlib).
 - [ ] NEAT example.
 
 # DISCLAIMER
