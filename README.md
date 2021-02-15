@@ -6,7 +6,12 @@ The project is in very early stage, so there are a lot of inconvenient part that
 
 ## Installation 
 ### 1. freqtrade
-Follow the [freqtrade documentation](https://www.freqtrade.io/en/latest/) to install freqtrade
+Follow the [freqtrade documentation](https://www.freqtrade.io/en/latest/) to install freqtrade  
+  
+Initialize the user_directory  
+```sh
+freqtrade create-userdir --userdir user_data/
+```  
 
 ### 2. Pandas
 ```sh
@@ -18,8 +23,19 @@ pip install pandas
 pip install gym
 ```
 
+### 4. Copy freqtrade-gym files  
+#### Baseline files  
+IndicatorforRL.py -> [freqtrade home]/user_data/strategies/IndicatorforRL.py  
+config_rl.json -> [freqtrade home]/config_rl.json  
+freqtradegym.py -> [freqtrade home]/freqtradegym.py  
+deep_rl.py -> [freqtrade home]/deep_rl.py  
+#### RLib  
+Copy first the baseline files.  
+LoadRLModel.py -> [freqtrade home]/user_data/strategies/LoadRLModel.py  
+rllib_example.py -> [freqtrade home]/rllib_example.py  
+
 ## Example Usage (baseline)  
-The usage example is deep_rl.py and the config for freqtrade and freqtrade-gym is config_rl.json and use IndicatorforRL.py as feature extraction.  
+The usage example is deep_rl.py and the config for freqtrade and freqtrade-gym is config_rl.json and uses IndicatorforRL.py as feature extraction.  
 This demo is using [openai baseline library](https://github.com/hill-a/stable-baselines) to train reinforcement learning agents.  
 Baseline can install by  
 ```sh
@@ -27,15 +43,14 @@ sudo apt-get update && sudo apt-get install cmake libopenmpi-dev python3-dev zli
 pip install stable-baselines[mpi]
 ```
 
-Initialize the user_directory  
-```sh
-freqtrade create-userdir --userdir user_data/
-```  
-
 Download historical data  
 (Remember to download a little bit more data than the timerange in config file just in case.)  
 ```sh
 freqtrade download-data -c <config file> --days <Int> -t {1m,3m,5m...}
+```  
+To match the example config_rl.json  
+```sh
+freqtrade download-data -c config_rl.json --timerange 20201119-20201201 -t 15m
 ```  
 
 Move the IndicatorforRL.py into user_data/strategies (you should have user_data/strategies/IndicatorforRL.py)  
@@ -54,7 +69,7 @@ This will look like
 ![alt tensorboard](TensorBoardScreenshot.png?raw=true  "tensorboard")  
 
 ## Example Usage (RLlib)  
-he usage example is rllib_example.py and the config for freqtrade and freqtrade-gym is config_rl.json and use IndicatorforRL.py as feature extraction.  
+The usage example is rllib_example.py and the config for freqtrade and freqtrade-gym is config_rl.json and uses IndicatorforRL.py as feature extraction.  
 This demo is using [RLlib](https://docs.ray.io/en/master/rllib.html) to train reinforcement learning agents.  
 Baseline can install by  
 ```sh
@@ -67,7 +82,7 @@ python rllib_example.py
 ```  
 
 
-## Example of Loading model backtesting for or trading (baseline)  
+## Example of Loading model for backtesting or trading (baseline)  
 
 Move the LoadRLModel.py into user_data/strategies (you should have user_data/strategies/LoadRLModel.py)  
 
@@ -77,7 +92,7 @@ Modified the populate_indicators and rl_model_redict method for your gym setting
 
 Run the backtesting  
 ```sh  
-feqtrade backtesting -c config_rl.json -s LoadRLModel
+freqtrade backtesting -c config_rl.json -s LoadRLModel
 ```  
 
 Dry-run trading (remove --dry-run for real deal!)  
