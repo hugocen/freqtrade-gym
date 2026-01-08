@@ -87,6 +87,7 @@ class TradingEnv(gym.Env):
 
         self.observation_space = spaces.Box(
             low=np.full(24, -np.inf), high=np.full(24, np.inf), dtype=np.float)
+        self.last_profit_ratio = 0.0
 
     def _next_observation(self):    
         row = self.ticker[self.index]
@@ -179,6 +180,7 @@ class TradingEnv(gym.Env):
                     "type": 'buy',
                     "total": self.status.open
                 })
+                self.last_profit_ratio = 0.0
 
                 logger.debug("{} - Backtesting emulates creation of new trade: {}.".format(
                     self.pair, self.trade))
@@ -191,6 +193,7 @@ class TradingEnv(gym.Env):
                 self.money += profit_abs
                 self.trade = None
                 self._reward = profit_percent
+                self.last_profit_ratio = 0.0
 
                 self.trades.append({
                     "step": self.index,
@@ -204,19 +207,31 @@ class TradingEnv(gym.Env):
         self._take_action(action)
 
         self.index += 1
-        if self._reward > 1.5:
-            self._reward = 0
 
+        done = False
         if self.index >= len(self.ticker):
-            self.index = 0
+            self.index = len(self.ticker) - 1
+            done = True
 
         self.steps += 1
+
+        if self._reward == 0 and not done:
+            row = self.ticker[self.index]
+            if self.trade is not None:
+                profit_ratio = self.trade.calc_profit_ratio(rate=row.open)
+                self._reward = profit_ratio - self.last_profit_ratio
+                self.last_profit_ratio = profit_ratio
+            else:
+                self._reward = -self.reward_decay
+
+        if done and self.trade is not None:
+            self._reward -= self.not_complete_trade_decay
 
         self.total_reward += self._reward
 
         # done = (self._reward < self.game_loss) # or (self.steps > self.day_step)
         # done = (self.total_reward < self.game_loss) or (self.total_reward > self.game_win) or (self.steps > self.day_step)
-        done = self.steps > self.simulate_length     
+        done = done or self.steps > self.simulate_length
 
         obs = self._next_observation()
 
@@ -233,6 +248,7 @@ class TradingEnv(gym.Env):
         self._reward = 0
         self.total_reward = 0
         self.money = 0
+        self.last_profit_ratio = 0.0
 
         self.visualization = None        
 
